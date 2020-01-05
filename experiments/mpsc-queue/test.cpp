@@ -1,4 +1,4 @@
-#include "mpsq-queue.hpp"
+#include "mpsc-queue.hpp"
 
 #include <iostream>
 #include <vector>
