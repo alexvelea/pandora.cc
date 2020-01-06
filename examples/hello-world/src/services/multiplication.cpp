@@ -2,12 +2,18 @@
 
 #include "addition.hpp"
 
-Multiplication::Response Multiplication::operator() (const Multiplication::Request& request) {
+void Multiplication::call_blocking(const Multiplication::Request& request, Multiplication::Response& response) {
     int answer = 0;
+
     for (int i = 1; i <= request.a; i += 1) {
-        answer = addition({answer, request.b}).x;
+        answer = Addition::caller({answer, request.b}).get().x;
     }
-    return {answer};
+
+    response.x = answer;
 }
 
-Multiplication multiplication;
+std::future<Multiplication::Response> Multiplication::operator() (const Multiplication::Request& request) {
+    return enqueue<Multiplication>(request);
+}
+
+Multiplication Multiplication::caller;

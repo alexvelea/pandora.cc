@@ -17,8 +17,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_PATH})
 include_directories(${INCLUDE_DIR})
 
 set(PANDORACC_SRCS
-        src/impl.cpp)
+        src/services.cpp)
 
 add_library(pandora ${PANDORACC_SRCS} )
 
+find_package (Threads)
 include(examples/all.cmake)

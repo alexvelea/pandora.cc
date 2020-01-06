@@ -1,8 +1,12 @@
 #pragma once
 
+#include <future>
+
 #include <pandora/services.hpp>
 
 struct Multiplication {
+    static const int q_number = 0;
+
     struct Request {
         int a, b;
     };
@@ -11,8 +15,9 @@ struct Multiplication {
         int x;
     };
 
-    Response operator() (const Request&);
-};
+    std::future<Response> operator() (const Request&);
+    void call_blocking(const Request&, Response&);
 
-extern Multiplication multiplication;
+    static Multiplication caller;
+};
 
