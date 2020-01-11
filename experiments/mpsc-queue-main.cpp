@@ -25,8 +25,10 @@ void Consume() {
 
     while (num_finished != num_threads) {
         int query;
-        if (not mps.dequeue(query)) {
+        if (not mps.can_dequeue()) {
             continue;
+        } else {
+            mps.dequeue(query);
         }
 
         if (query == 0) {
