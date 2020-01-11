@@ -10,7 +10,9 @@ extern MPSCQueue<std::function<void()>> queues[2];
 
 template<typename T, typename Response = typename T::Response, typename Request = typename T::Request>
 std::future<Response> enqueue(const Request& request) {
-    auto *promise = new std::promise<Response>();
+    auto promise = new std::promise<Response>();
+    std::future<Response> r = promise->get_future();
+
     queues[T::q_number].enqueue([=](){
         Response r;
         T::caller.call_blocking(request, r);
@@ -18,7 +20,7 @@ std::future<Response> enqueue(const Request& request) {
         delete promise;
     });
 
-    return promise->get_future();
+    return std::move(r);
 }
 
 // used to soft-stop the queue
