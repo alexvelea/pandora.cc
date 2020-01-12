@@ -1,9 +1,91 @@
 #include <iostream>
 #include <future>
+#include <atomic>
 #include "mpsc-queue.hpp"
 
 using std::cerr;
 
+struct FutureBase {
+    std::atomic<bool> is_set = false;
+    std::atomic<int> counter = 0;
+    bool is_main = true;
+    int val;
+
+    void check() {
+        if (counter.fetch_sub(1) == 1) {
+            delete this;
+        }
+    }
+};
+
+struct Future {
+    FutureBase* f;
+
+    Future(FutureBase* f) : f(f) {
+        f->counter++;
+    }
+
+    Future(const Future& f) : f(f.f) {
+        this->f->counter++;
+    }
+
+    Future(Future&& f) : f(f.f) {
+        f.f = nullptr;
+    }
+
+    Future& operator=(Future&&) = delete;
+    Future& operator=(const Future&) = delete;
+
+    ~Future() {
+        if (f) {
+            f->check();
+        }
+    }
+
+    int get() {
+        while (f->is_set == false) {
+            continue;
+        }
+        return f->val;
+    }
+};
+
+struct Promise {
+    FutureBase* f;
+
+    Promise() {
+        f = new FutureBase();
+        f->counter++;
+    }
+
+    Promise(const Promise& p) {
+        p.f->counter++;
+        f = p.f;
+    }
+
+    Promise(Promise&& p) {
+        f = p.f;
+        p.f = nullptr;
+    }
+
+    Promise& operator=(const Promise&) = delete;
+    Promise& operator=(Promise&&) = delete;
+
+    ~Promise() {
+        if (f) {
+            f->check();
+        }
+    }
+
+    void set_value(int val) {
+        f->val = val;
+        f->is_set = true;
+    }
+
+    Future get_future() {
+        return Future(f);
+    }
+};
 
 const int kNumIters = 1e6;
 
@@ -19,7 +101,7 @@ bool IsPrime(int x) {
 
 struct reqres {
     int request;
-    std::promise<bool> response;
+    Promise response;
 };
 
 mpsc_queue_t<reqres*> q;
@@ -30,14 +112,14 @@ void consume_is_prime() {
     while (remaining) {
         if (q.can_dequeue()) {
             q.dequeue(x);
-            x->response.set_value(IsPrime(x->request));
+            x->response.set_value(IsPrime(x->request) + x->request * 10);
             delete x;
             remaining -= 1;
         }
     }
 }
 
-std::future<bool> Enqueue(int x) {
+Future Enqueue(int x) {
     reqres* r = new reqres;
     r->request = x;
     auto f = r->response.get_future();
