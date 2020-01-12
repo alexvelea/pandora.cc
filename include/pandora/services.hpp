@@ -1,23 +1,23 @@
 #pragma once
 
-#include <future>
+#include <functional>
 #include <thread>
 #include <vector>
 
+#include "primitives/future.hpp"
 #include "primitives/mpsc-queue.hpp"
 
 extern MPSCQueue<std::function<void()>> queues[2];
 
 template<typename T, typename Response = typename T::Response, typename Request = typename T::Request>
-std::future<Response> enqueue(const Request& request) {
-    auto promise = new std::promise<Response>();
-    std::future<Response> r = promise->get_future();
+Future<Response> enqueue(const Request& request) {
+    Promise<Response> promise;
+    Future<Response> r = promise.get_future();
 
     queues[T::q_number].enqueue([=](){
         Response r;
         T::caller.call_blocking(request, r);
-        promise->set_value(r);
-        delete promise;
+        promise.set_value(r);
     });
 
     return std::move(r);

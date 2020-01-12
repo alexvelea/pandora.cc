@@ -5,7 +5,7 @@ void Addition::call_blocking(const Addition::Request& request, Addition::Respons
     response.x = request.a + request.b;
 }
 
-std::future<Addition::Response> Addition::operator() (const Addition::Request& request) {
+Future<Addition::Response> Addition::operator() (const Addition::Request& request) {
     return enqueue<Addition>(request);
 }
 

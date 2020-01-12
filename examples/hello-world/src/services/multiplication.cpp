@@ -12,7 +12,7 @@ void Multiplication::call_blocking(const Multiplication::Request& request, Multi
     response.x = answer;
 }
 
-std::future<Multiplication::Response> Multiplication::operator() (const Multiplication::Request& request) {
+Future<Multiplication::Response> Multiplication::operator() (const Multiplication::Request& request) {
     return enqueue<Multiplication>(request);
 }
 

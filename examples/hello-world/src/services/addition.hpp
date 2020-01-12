@@ -15,7 +15,7 @@ struct Addition {
         int x;
     };
 
-    std::future<Response> operator() (const Request&);
+    Future<Response> operator() (const Request&);
     void call_blocking(const Request&, Response&);
 
     static Addition caller;

@@ -28,6 +28,15 @@ class MPSCQueue {
         delete front;
     }
 
+    void enqueue(T&& input) {
+        BufferNode* node = reinterpret_cast<BufferNode*>(new BufferNodeAligned);
+        node->data = std::move(input);
+        node->next.store(nullptr, std::memory_order_relaxed);
+
+        BufferNode* prev_head = _head.exchange(node, std::memory_order_acq_rel);
+        prev_head->next.store(node, std::memory_order_release);
+    }
+
     void enqueue(const T& input) {
         BufferNode* node = reinterpret_cast<BufferNode*>(new BufferNodeAligned);
         node->data = input;
