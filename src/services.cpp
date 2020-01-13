@@ -3,16 +3,20 @@
 #include <thread>
 #include <vector>
 
-MPSCQueue<std::function<void()>> queues[2];
+thread_local int thread_index = -1;
+
+MPSCQueue<std::function<void()>*> queues[128];
 
 bool running_queues;
 
 void consume(int q_number) {
-    std::function<void()> callee;
+    thread_index = q_number;
+    std::function<void()>* callee;
     while (running_queues) {
         if (queues[q_number].can_dequeue()) {
             queues[q_number].dequeue(callee);
-            callee();
+            (*callee)();
+            delete callee;
         }
     }
 }

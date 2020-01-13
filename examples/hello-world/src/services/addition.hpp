@@ -1,11 +1,9 @@
 #pragma once
-
-#include <future>
-
 #include <pandora/services.hpp>
 
 struct Addition {
-    static const int q_number = 1;
+    static std::string rpc_name;
+    static std::vector<int> run_ids;
 
     struct Request {
         int a, b;
@@ -15,9 +13,11 @@ struct Addition {
         int x;
     };
 
-    Future<Response> operator() (const Request&);
-    void call_blocking(const Request&, Response&);
+    static Future<Response> async(const Request&);
+    static void blocking(const Request&, Response*);
 
-    static Addition caller;
+    Addition(int) { }
+
+    void internal_blocking(const Request&, Response*);
 };
 

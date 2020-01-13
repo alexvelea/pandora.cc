@@ -1,11 +1,9 @@
 #pragma once
-
-#include <future>
-
 #include <pandora/services.hpp>
 
 struct Multiplication {
-    static const int q_number = 0;
+    static std::string rpc_name;
+    static std::vector<int> run_ids;
 
     struct Request {
         int a, b;
@@ -15,9 +13,11 @@ struct Multiplication {
         int x;
     };
 
-    Future<Response> operator() (const Request&);
-    void call_blocking(const Request&, Response&);
+    static Future<Response> async(const Request&);
+    static void blocking(const Request&, Response*);
 
-    static Multiplication caller;
+    Multiplication(int) { }
+
+    void internal_blocking(const Request&, Response*);
 };
 
