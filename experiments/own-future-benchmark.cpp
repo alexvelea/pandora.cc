@@ -6,8 +6,8 @@
 using std::cerr;
 
 struct FutureBase {
-    std::atomic<bool> is_set = false;
-    std::atomic<int> counter = 0;
+    std::atomic<bool> is_set;
+    std::atomic<int> counter;
     bool is_main = true;
     int val;
 
@@ -87,15 +87,9 @@ struct Promise {
     }
 };
 
-const int kNumIters = 1e6;
+int kNumIters;
 
 bool IsPrime(int x) {
-    for (int i = 2; i < x; i += 1) {
-        if (x % i == 0) {
-            return false;
-        }
-    }
-
     return true;
 }
 
@@ -127,7 +121,15 @@ Future Enqueue(int x) {
     return std::move(f);
 }
 
-int main() {
+
+int main(int argc, char** argv) {
+    if (argc < 2) {
+        cerr << "Usage: ./exe num_requests\n";
+        return 0;
+    }
+
+    kNumIters = atoi(argv[1]);
+
     std::thread consumer(consume_is_prime);
     int ans = 0;
     for (int i = 0; i < kNumIters; i += 1) {

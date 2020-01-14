@@ -22,10 +22,12 @@ void Consume() {
     int last = 0;
     int num_switch = 0;
     int num_consumed = 0;
+    int num_miss = 0;
 
     while (num_finished != num_threads) {
         int query;
         if (not mps.can_dequeue()) {
+            num_miss += 1;
             continue;
         } else {
             mps.dequeue(query);
@@ -48,6 +50,7 @@ void Consume() {
     cerr << num_consumed << " queries\n";
     cerr << num_switch << " switches\n";
     cerr << 100 * num_switch / num_consumed << " percentage switch\n";
+    cerr << num_miss << " num misses\n";
 }
 
 using std::vector;
