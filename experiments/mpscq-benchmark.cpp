@@ -3,11 +3,15 @@
 #include <iostream>
 #include <vector>
 #include <thread>
+#include <sys/time.h>
 using std::cerr;
 
 int num_threads = 0;
 
 mpsc_queue_t<int> mps;
+
+
+long int times[100];
 
 void Produce(int num, int num_produce) {
     for (int _ = 0; _ < num_produce; _ += 1) {
@@ -15,6 +19,11 @@ void Produce(int num, int num_produce) {
     }
 
     mps.enqueue(0);
+
+    struct timeval tp;
+    gettimeofday(&tp, NULL);
+    long int ms = tp.tv_sec * 1000 + tp.tv_usec / 1000;
+    times[num] = ms;
 }
 
 void Consume() {
@@ -57,6 +66,9 @@ using std::vector;
 using std::thread;
 
 int main(int argc, char** argv) {
+    struct timeval tp;
+    gettimeofday(&tp, NULL);
+    long int ms = tp.tv_sec * 1000 + tp.tv_usec / 1000;
     if (argc < 3) {
         cerr << "Usage: ./exe num_threads num_produce_per_thread\n";
         return 0;
@@ -78,4 +90,19 @@ int main(int argc, char** argv) {
     for (auto& itr : producers) {
         itr.join();
     }
+
+    long int mn = times[1];
+    long int mx = times[1];
+    long int sum = 0;
+    for (int i = 1; i <= num_threads; i += 1) {
+        mn = std::min(mn, times[i]);
+        mx = std::max(mx, times[i]);
+        sum += times[i] - ms;
+    }
+
+    mn -= ms;
+    mx -= ms;
+
+
+    std::cerr << "min: " << mn << '\t' << "max: " << mx << '\t' << "sum: " << sum << '\t' << "avg: " << sum / num_threads << '\n';
 }
