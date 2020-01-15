@@ -2,12 +2,22 @@
 
 #include <atomic>
 #include <future>
+#include <string.h>
 
 template<typename T>
 struct FutureBase {
     std::atomic<bool> is_set;
     std::atomic<int> counter;
     T value;
+
+    static FutureBase<T>* create() {
+        auto p = (FutureBase<T>*)malloc(sizeof(FutureBase<T>));
+        memset(&(p->value), 0, sizeof(T));
+
+        p->is_set = false;
+        p->counter = 0;
+        return p;
+    }
 
     void decrement_counter() {
         if (counter.fetch_sub(1) == 1) {
@@ -16,13 +26,6 @@ struct FutureBase {
     }
 
     FutureBase() = delete;
-
-    static FutureBase<T>* create() {
-        auto p = (FutureBase<T>*)malloc(sizeof(FutureBase<T>));
-        p->is_set = false;
-        p->counter = 0;
-        return p;
-    }
 
     FutureBase(const FutureBase&) = delete;
     FutureBase(FutureBase&&) = delete;

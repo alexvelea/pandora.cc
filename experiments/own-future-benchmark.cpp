@@ -8,7 +8,6 @@ using std::cerr;
 struct FutureBase {
     std::atomic<bool> is_set;
     std::atomic<int> counter;
-    bool is_main = true;
     int val;
 
     void check() {
