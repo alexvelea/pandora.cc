@@ -9,6 +9,10 @@
 #include <thread>
 #include <vector>
 
+
+#include <EasyFlags.hpp>
+AddArgument(std::vector<std::string>, defaultLoadedServices).Name("load_on_start")
+        .Description("Load specified services on startup");
 thread_local int thread_index = -1;
 
 ServiceState state;
@@ -41,14 +45,15 @@ std::vector<std::thread> start_queues() {
 }
 
 void InitPandora(int argc, char** argv) {
+    easyflags::ParseEasyFlags(argc, argv);
     //    get_state = &get_state_internal;
     void* handle;
     vector<pair<string, ServiceCExtern>> (*get_internal_handlers)(void);
 
     size_t last_handler = 0;
 
-    for (int i = 1; i < argc; i += 1) {
-        handle = dlopen(("./lib" + string(argv[i]) + ".so").c_str(), RTLD_LAZY);
+    for (const auto& service_name : defaultLoadedServices) {
+        handle = dlopen(("./lib" + service_name + ".so").c_str(), RTLD_LAZY);
 
         if (!handle) {
             /* fail to load the library */
