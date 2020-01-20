@@ -21,7 +21,7 @@ struct TypeName {
             name = abi::__cxa_demangle(typeid(T).name(), nullptr, nullptr, &status);
             std::string ans = (name != nullptr) ? name : typeid(T).name();
             free(name);
-            std::cerr << "Template Name: \"" << ans << "\"\n";
+            // std::cerr << "Template Name: \"" << ans << "\"\n";
             ret_ans = ans;
         }
         return ret_ans;
