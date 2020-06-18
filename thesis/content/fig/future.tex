@@ -1,0 +1,46 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[y=.5cm, x=.5cm,font=\sffamily]
+ 	%axis
+
+	\draw (0,0) -- coordinate (x axis mid) (15,0);
+    	\draw (0,0) -- coordinate (y axis mid) (0,15);
+    	%ticks
+    	\foreach \x in {0, 1, 2.5, 5, 10, 15}
+     		\draw (\x,1pt) -- (\x,-3pt)
+			node[anchor=north] {\x};
+    	\foreach \y in {0,3,...,15}
+     		\draw (1pt,\y) -- (-3pt,\y) 
+     			node[anchor=east] {\y}; 
+	%labels      
+	\node[below=0.8cm] at (x axis mid) {$10^6 \times$ number of requests};
+	\node[rotate=90, yshift=1.5cm] at (y axis mid) {Time in seconds};
+
+	% plots
+	\draw plot[mark=*, mark options={fill=white}] 
+		file {future_benchmark.data};
+	\draw plot[mark=triangle*, mark options={fill=white} ] 
+		file {own_future_benchmark.data};
+	\draw plot[mark=square*, mark options={fill=white}]
+		file {mpscq_throttled_benchmark.data};
+	\draw plot[mark=square*]
+		file {pandora_benchmark.data};  
+    
+	%legend
+	\begin{scope}[shift={(4,4)}] 
+	\draw[yshift=+3cm, xshift=-1cm] (0,0) -- 
+		plot[mark=*, mark options={fill=white}] (0.25,0) -- (0.5,0) 
+		node[right]{std future};
+	\draw[yshift=\baselineskip+3cm, xshift=-1cm] (0,0) -- 
+		plot[mark=triangle*, mark options={fill=white}] (0.25,0) -- (0.5,0)
+		node[right]{own future};
+	\draw[yshift=2\baselineskip+3cm, xshift=-1cm] (0,0) -- 
+		plot[mark=square*, mark options={fill=white}] (0.25,0) -- (0.5,0)
+		node[right]{MPSCQ};
+	\draw[yshift=3\baselineskip+3cm, xshift=-1cm] (0,0) -- 
+		plot[mark=square*, mark options={fill=black}] (0.25,0) -- (0.5,0)
+		node[right]{Pandora};
+	\end{scope}
+\end{tikzpicture}
+\caption{Future-Promise Benchmark}
+\end{figure}

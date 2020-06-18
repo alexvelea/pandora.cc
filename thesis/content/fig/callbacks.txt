@@ -1,0 +1,21 @@
+void GetAd(Request, Response) {
+  // do some extra work
+  auto cache_hit = MicroserviceLocalState.GlobalCache.Got(Request);
+  if (cache_hit) { Reponse = cache_hit.Get(); }
+  else { GetAdActor(Request, Response); }
+}
+void GetAdActor(Request, Response) {
+  this->received_ads = vector<AdResponse>(10);
+  for (int i = 0; i < 10; i += 1) // request 10 ads, keep the best one
+    SuggestAd(Request).Callback([=](Response){ // keep track of responses
+      this->received_ads[i] = Response; });
+  WakeAfter(100ms).Callback([=]() {
+    // set the actor response to be the 'best' ad received
+    Response = BestResponseOf(this->received_ads); 
+    // update the cache
+    UpdateGlobalCache({request, response}, {});
+  });
+}
+void UpdateGlobalCache(Request, Response) {
+  MicroserviceLocalState.GlobalCache.Set(Request.request, Request.best_ad);
+}

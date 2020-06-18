@@ -1,0 +1,76 @@
+\begin{thebibliography}{10}
+
+\bibitem{progimpact}
+Emery~D. Berger, Celeste Hollenbeck, Petr Maj, Olga Vitek, and Jan Vitek.
+\newblock On the impact of programming languages on code quality, 2019.
+\newblock arXiv:1901.10220.
+
+\bibitem{klock}
+Sander Klock, Jan Martijn E.~M. van~der Werf, Jan~Pieter Guelen, and Slinger
+  Jansen.
+\newblock Workload-based clustering of coherent feature sets in microservice
+  architectures.
+\newblock {\em 2017 IEEE International Conference on Software Architecture
+  (ICSA)}, pages 11--20, 2017.
+
+\bibitem{viggiato}
+Markos Viggiato, Ricardo Terra, Henrique Rocha, Marco Valente, and Eduardo
+  Figueiredo.
+\newblock Microservices in practice: A survey study.
+\newblock 09 2018.
+\newblock Conference: VI Workshop on Software Visualization, Evolution and
+  Maintenance, At São Carlos - Brazil.
+
+\bibitem{newman}
+Sam Newman.
+\newblock {\em Building Microservices}.
+\newblock O'Reilly Media, 2015.
+
+\bibitem{alshuqayran}
+Nuha Alshuqayran, Nour Ali, and Roger Evans.
+\newblock A systematic mapping study in microservice architecture.
+\newblock In {\em 2016 IEEE 9th International Conference on Service-Oriented
+  Computing and Applications}, pages 44--51. IEEE, 11 2016.
+
+\bibitem{hassan}
+Sara Hassan, Nour Ali, and Rami Bahsoon.
+\newblock Microservice ambients: An architectural meta-modelling approach for
+  microservice granularity.
+\newblock 04 2017.
+\newblock IEEE ICSA, pages 1–10, doi: 10.1109/ICSA.2017.32.
+
+\bibitem{monzo}
+Jack Kleeman.
+\newblock We built network isolation for 1,500 services to make monzo more
+  secure, 11 2019.
+\newblock Available at
+  https://monzo.com/blog/we-built-network-isolation-for-1-500-services.
+
+\bibitem{hewitt}
+Carl Hewitt, Peter Bishop, and Richard Steiger.
+\newblock A universal modular actor formalism for artificial intelligence.
+\newblock In {\em Proceedings of the 3rd International Joint Conference on
+  Artificial Intelligence}, IJCAI’73, page 235–245, San Francisco, CA, USA,
+  1973. Morgan Kaufmann Publishers Inc.
+
+\bibitem{charousset}
+Dominik Charousset, Thomas~C. Schmidt, Raphael Hiesgen, and Matthias
+  W{\"a}hlisch.
+\newblock {Native Actors -- A Scalable Software Platform for Distributed,
+  Heterogeneous Environments}.
+\newblock In {\em Proc. of the 4rd ACM SIGPLAN Conference on Systems,
+  Programming, and Applications (SPLASH '13), Workshop AGERE!}, pages 87--96,
+  New York, NY, USA, Oct. 2013. ACM.
+
+\bibitem{mpscq}
+Dmitry Vyukov.
+\newblock Non-intrusive mpsc node-based queue.
+\newblock Available at
+  http://www.1024cores.net/home/lock-free-algorithms/queues/non-intrusive-mpsc-node-based-queue.
+
+\bibitem{mpscq-implement}
+Matt Stump.
+\newblock A public domain lock free queues implemented in c++11.
+\newblock https://github.com/mstump/queues/blob/master/include/mpsc-queue.hpp.
+
+\end{thebibliography}

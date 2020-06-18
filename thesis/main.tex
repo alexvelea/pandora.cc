@@ -1,0 +1,77 @@
+\documentclass[a4paper, twoside, 12pt]{report}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{hyperref}
+\hypersetup{colorlinks=false}
+\usepackage{lscape}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{ amssymb }
+\usepackage{upgreek}
+\usepackage{indentfirst}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{scrextend}
+\usepackage{calc}
+% \usepackage{times}
+\addtokomafont{labelinglabel}{\sffamily}
+
+\usepackage[subfigure]{tocloft}
+\usepackage{titlesec}
+\usepackage{enumerate}
+\usepackage{combelow}
+\usepackage{newunicodechar}
+\usepackage{mathrsfs}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{plotmarks}
+
+\definecolor{codeborder}{HTML}{e6e8eb}
+\definecolor{codegray}{HTML}{f7f9fa}
+\newcommand{\code}[1]{\fcolorbox{codeborder}{codegray}{\texttt{#1}}}
+
+
+\linespread{1.25}
+%\usepackage{mathptmx}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
+
+\title{%
+	Pandora.cc \\
+	\large Multithreading and Cloud Computing in a box}
+\author{Alexandru Velea}
+% Update supervisor and other title stuff in title/title.tex
+
+\input{content/fig/all-plot-data.tex}
+
+\begin{document}
+\input{content/title.tex}
+
+\begin{abstract}
+\input{content/abstract.tex}
+\end{abstract}
+\begin{abstract}
+\input{content/abstract_ro.tex}
+\end{abstract}
+
+\tableofcontents
+\listoffigures
+
+\input{content/chapter1.tex}
+\input{content/chapter2.tex}
+\input{content/chapter3.tex}
+\input{content/chapter4.tex}
+\input{content/chapter5.tex}
+\input{content/conclusion.tex}
+
+\bibliographystyle{unsrt}
+\bibliography{content/bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+
+\end{document}

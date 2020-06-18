@@ -1,0 +1,45 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[y=.3cm, x=.5cm,font=\sffamily]
+ 	%axis
+	\draw (0,0) -- coordinate (x axis mid) (15,0);
+    	\draw (0,0) -- coordinate (y axis mid) (0,24);
+    	%ticks
+    	\foreach \x in {0,2,...,14}
+     		\draw (\x,1pt) -- (\x,-3pt)
+			node[anchor=north] {\x};
+    	\foreach \y in {0,3,...,24}
+     		\draw (1pt,\y) -- (-3pt,\y) 
+     			node[anchor=east] {\y}; 
+	%labels      
+	\node[below=0.8cm] at (x axis mid) {Number of producers};
+	\node[rotate=90, yshift=1.5cm] at (y axis mid) {Time in seconds};
+
+	%plots
+	\draw plot[mark=*, mark options={fill=white}] 
+		file {real_time.data};
+	\draw plot[mark=triangle*, mark options={fill=white} ] 
+		file {producer_max_end.data};
+	% \draw plot[mark=square*, mark options={fill=white}]
+	% 	file {div_ciu_oscar.data};
+	% \draw plot[mark=square*]
+	% 	file {div_ciu_oscar_extrapolated.data};  
+    
+	%legend
+	\begin{scope}[shift={(4,4)}] 
+	\draw[yshift=+4cm, xshift=-1cm] (0,0) -- 
+		plot[mark=*, mark options={fill=white}] (0.25,0) -- (0.5,0) 
+		node[right]{binary end-time};
+	\draw[yshift=\baselineskip+4cm, xshift=-1cm] (0,0) -- 
+		plot[mark=triangle*, mark options={fill=white}] (0.25,0) -- (0.5,0)
+		node[right]{producer end-time};
+	% \draw[yshift=2\baselineskip] (0,0) -- 
+	% 	plot[mark=square*, mark options={fill=white}] (0.25,0) -- (0.5,0)
+	% 	node[right]{ciu + oscar};
+	% \draw[yshift=3\baselineskip] (0,0) -- 
+	% 	plot[mark=square*, mark options={fill=black}] (0.25,0) -- (0.5,0)
+	% 	node[right]{ciu + oscar extrapolated};
+	\end{scope}
+\end{tikzpicture}
+\caption{MPSCQ Benchmark}
+\end{figure}

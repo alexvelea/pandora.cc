@@ -1,0 +1,35 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}
+\contentsline {section}{\numberline {1.1}Overview}{4}{section.1.1}
+\contentsline {section}{\numberline {1.2}Structure}{5}{section.1.2}
+\contentsline {chapter}{\numberline {2}Glossary}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Arhitectures}{7}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Microservices}{7}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Nanoservices}{8}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}Parallel computing}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Concurrency}{8}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Threads}{9}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Promises and futures}{9}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Callbacks}{9}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}The actor model}{10}{subsection.2.2.5}
+\contentsline {chapter}{\numberline {3}Framework Overview}{11}{chapter.3}
+\contentsline {section}{\numberline {3.1}Motivation}{11}{section.3.1}
+\contentsline {section}{\numberline {3.2}What it does}{12}{section.3.2}
+\contentsline {section}{\numberline {3.3}Target use cases}{14}{section.3.3}
+\contentsline {chapter}{\numberline {4}Architectural and Design Decisions}{16}{chapter.4}
+\contentsline {section}{\numberline {4.1}Design Principles}{16}{section.4.1}
+\contentsline {section}{\numberline {4.2}Microservices}{18}{section.4.2}
+\contentsline {section}{\numberline {4.3}Nanoservices}{21}{section.4.3}
+\contentsline {section}{\numberline {4.4}Actor model}{23}{section.4.4}
+\contentsline {section}{\numberline {4.5}Conclusions}{24}{section.4.5}
+\contentsline {section}{\numberline {4.6}Tools}{25}{section.4.6}
+\contentsline {chapter}{\numberline {5}Implementing the framework}{27}{chapter.5}
+\contentsline {section}{\numberline {5.1}Mailbox}{27}{section.5.1}
+\contentsline {section}{\numberline {5.2}Futures and Promises}{28}{section.5.2}
+\contentsline {section}{\numberline {5.3}Designing Nanoservices}{32}{section.5.3}
+\contentsline {section}{\numberline {5.4}In depth example overview}{33}{section.5.4}
+\contentsline {section}{\numberline {5.5}Development process}{35}{section.5.5}
+\contentsline {section}{\numberline {5.6}Testing}{36}{section.5.6}
+\contentsline {chapter}{\numberline {6}Conclusion}{38}{chapter.6}
+\contentsline {section}{\numberline {6.1}Future Work}{39}{section.6.1}
+\contentsline {chapter}{Bibliography}{41}{chapter*.1}

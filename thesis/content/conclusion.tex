@@ -1,0 +1,23 @@
+\chapter{Conclusion}
+Even thou state of the art offers a consolidated option when talking about large-scale applications, throw the use of famous microservice frameworks, we showed that it’s possible to introduce a new approach that might be useful in some cases.
+
+While developers try to stay away from C++ and gravitate towards new languages such as Python, JS and Go, Pandora.cc offers outstanding performance combined with an intuitive and modern API. Being a blend of multiple approaches, we created something which can be described as “the best of both world” for some users. The reduced upfront cost of using the framework and the potential gains, even for multithreaded activities, might make Pandora a competitive option for this use-case alone.
+
+The paper itself does a thorough job of educating the reader on various practices as well as showcasing the internals of the framework along with the great results that were achieved with this early build of the project. Being able to perform $1.5 \times 10^6$ operations per second, the overhead of the framework can be considered negligible even in latency-sensitive workload, without enforcing various restrictions to accommodate them.
+
+Design principles are often considered as implicit when presenting a new product. The presence of such practices offers better insight into the product itself and its role in the ecosystem. The process of putting down the motives driving it and some clear end-goals it’s a critical and often neglected step when creating a new product. In the end, both the creators and the end-users take advantage of this being publicly available; creators have a stable goal set in mind, being able to gather feedback along the way from external sources while being able to know that the product is going in the right direction, even if the road itself is not that straight forward. End-users can have an easier time choosing or understanding the product since they can understand the underlying principles on which it was built, reasoning if those coincide with their own.
+ 
+ Development process and Testing are often absent from such papers, but we hope to spark new ideas as well as offer a different approach to standard practices by including them. All of these things go hand-in-hand with the overall idea of framework, to analyze the current state of the art and break it down into smaller pieces, so it’ll be convenient to create something new, to better fit the individual requirements, without having the pay for extra features.
+
+\section{Future Work}
+It’s no secret that the framework is not complete, or that it could use some more refinement. We believe that the current state offers a good starting point as well as a great proof of concept to showcase the potential gain in speed if nothing else. Still, we’ll like to share our thoughts on the direction of the project, along with several concrete milestones to quantify the required work and areas of interest.
+
+\begin{itemize}
+\item \textbf{Binary interchange format for data-structures.} While coding with structs in C++ and using an automated JSON encoder/decoder can be seen as an easy option, the advantage and maturity of such binary protocols can’t be overlooked. Maybe the most common way to implement such practices, Protocol Buffers by Google, is trendy, a lot of good and faster alternatives started to become mainstream, such as Cap’n Proto.
+
+\item \textbf{Enforced topologies.} While being able to take advantage of all the microservices at once is a good idea for a small application, as the requirements grow, it’s common that all the resource that will be used by a microservice should be white-listed manually. This becomes a necessity if A-B testing or any form of experimental services are introduced.
+
+\item \textbf{Code generation.} A controversial topic nonetheless, code generation comes with both advantages and disadvantages. While it’s not of most importance, it’s good to keep in mind that such practices will come in handy when developing services.
+
+\item \textbf{Optimisations.} While the framework is fast, there is always room to improve. Careful resource management and allocations can yield some incredible performance improvements. Implementation changes and platform-specific optimisations such as \code{SSE} or \code{AVX} can further optimise the runtime.
+\end{itemize}

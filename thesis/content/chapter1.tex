@@ -1,0 +1,37 @@
+\chapter {Introduction}
+\section{Overview}
+Due to the rise of tech giants, microservices became more popular as a way to achieve horizontal scaling in large applications. As new projects are born, many developers look to this architectural style knowing they would be able to scale their application no matter the requirements while benefiting from the ease of development and testing which comes along.
+
+In reality, trying to implement an idea using microservices from the start can be a changeling task since it enforces many rules and practices, which could make the process more robust. Such examples could be changing APIs, deploying in early-development, and involving additional layers of complexity such as containers and networking.
+
+Pandora.cc tries to offer a fast and easy way to develop services in a new fast-changing decade. It tries to close the bridge between same-server parallel computing and cloud computing, being best suited for latency sensite application. The framework is build using lock-free data structures and CPU atomic data types to ensure that as little time as possible is wasted by waiting for resources on same-server case. The configurability which comes with the configuration system, called the bundling system, allows modifications of the network architecture without affecting the codebase, including which services are available on each instance. The source code of the framework can be found on GitHub at \code{github.com/alexvelea/pandora.cc}.
+
+The paper makes three main contributions. First, we present three architectures to justify a new design, showcasing the advantages and disadvantages of such practices. Second, we present a series of tools that facilitate better use and coherency when developing software with Pandora.cc framework. Third, we showcase the development process as well as demonstrating experimentally that the approach is optimal and achieves all the design principles put in place.
+
+\clearpage
+
+\section*{Framework advantages}
+
+\begin{itemize}
+\item \textbf{Easy API} All the development is done throw writing nanoservices, which are defined by a simple API consisting of a pair of Request-Response and the code to handle such a service. This process is as easy as designing a function that takes a single argument, the request, and returns a specialized value, the response.
+\item \textbf{High-speed messaging} Nanoservices calls on the same machine have reduced latency, peaking at $10^6$ messages/second/core. This functionality enables programs to run fast and efficient in early development until multiple servers are required, that is, until the application cannot be vertically scaled anymore. Horizontal scaling should come very late in a product's life since $128$ thread CPU's retail at around \$2000 as of the date of the paper.
+\item \textbf{Thread selection} The ability to specify on which CPU-thread a nanoservice should run on, enabling lock-free code if all the services are designed to be run on a single thread, for example, a set-get pair of services.
+ Extension of the nanoservices into the cloud, as micro-services, alongside a suite of features similar to the ones provided by Google's Protocol Buffers.
+\item \textbf{Hot Upgradeability} The rollout of new versions of specific nano-services can be done in production on targeted binaries while they are still running, meaning that even TCP connection could remain active while a rollout is taking place, reducing the down-time to 0.
+\end{itemize}
+
+\section{Structure}
+The first part of the paper, chapters 2 to 4, presents several concepts regarding cloud computing and multithreaded workloads, providing insights on both the advantages and disadvantages of several software architectures and practices. It presents Pandora.cc framework, reasoning about its position on the presented options while synthesizing some problems that it tries to solve. 
+
+The first part starts with a short glossary section, chapter 2, for those unfamiliar with some terms, followed by a short theoretical introduction, into the framework, chapter 3, allowing readers to grasp the end-goal, usages, and motivation behind the framework. All this offers vital insights to look after while going throw the rest of the paper.
+
+Chapter 4 goes into a in-depth comparison and preview of 3 software architectures: Microservices, Nanoservices and the Actor Model. While only a subset of the available technologies is showcased, it offers a good starting point for those unfamiliar with such practices while presenting them in a way that it’s easier to see how and why they were selected as inspiration for the framework. The paper presents then in a way that emphasizes good ideas that are going to be implemented while comparing the differences with each architecture. It concludes with a conclusion and tools section which ties all the design choices together, presenting potential drawbacks and putting, in contrast, these choices with the design principles taken into consideration while developing the framework. The tools can be seen as the most significant innovative contribution provided by the paper, further consolidating the design pieces.
+
+The second part of the paper, (chaper 5) presents the implementation of critical components of the framework, showcasing performance metrics as well as code-snippets to showcase how the components are meant to be used together. Optimizations play a big part in developing a fast framework, covering them offering insights on the inner workings of the framework as well as raising awareness for potential pitfalls in further development on various projects. 
+
+Chapter 5.4, In depth example overview, presents an example of a possible service along with two diagrams to explain the inner workings of the framework. The first one is an UML diagram, showcasing the user code and the interactions with the framework, containing the whole development-stack. The second one, a sequence diagram, presents how a request interacts with various components while being processed by the service.
+
+
+Chaper 5.5, Development process, offers more insights into the state of the project and the process of developing the framework itself. Although it doesn’t affect using the framework, it may give readers a new perspective for future projects. It tries to tackle common problems and offer new ways to look at things, focusing on taking notes from agile development practices while not being drowned in the complexity of implementing them ‘by the book’.
+
+Chaper 5.6, Testing, offers essential insight since it showcases controversial practices. Such principles can be seen in the framework itself, such as doing the bare minimum to achieve great results without over-engineering mainstream solutions just because they are popular. It makes good use of various tools that may be overlooked or unheard of while arguing over the cost of maintenance and development of the selected method.

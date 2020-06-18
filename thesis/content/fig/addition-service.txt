@@ -1,0 +1,24 @@
+struct Addition {
+  struct Request {
+    int a, b;
+  };
+  struct Response {
+    int aplusb;
+  };
+
+  // state accesible by all Addition workers
+  struct SharedState {
+    atomic<int> cumulative_num_calls;
+  };
+  
+  int num_calls = 0; // object specific state
+  Addition(int thread_number);
+  // public API which is used by other nanoservices
+  static Future<Response> async(const Request&);
+  static void blocking(const Request&, Response*);
+
+ private:
+  void handle_request(const Request&, Response*);
+  static SharedState shared;
+};
+RegisterService(Addition);

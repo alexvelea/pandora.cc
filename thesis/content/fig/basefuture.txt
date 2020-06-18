@@ -1,0 +1,12 @@
+
+struct BaseFuture {
+  std::atomic<bool> is_set;
+  std::atomic<int>  counter;
+  T                 value;
+
+  void decrement_counter() {
+      if (counter.fetch_sub(1) == 1) {
+          delete this;
+      } 
+  }
+};
